@@ -16,6 +16,8 @@ const usePokemons = (type) => {
                     return formatPokemonData(data);
                 })
             );
+            //return pokemons;
+
 
             const filtered = pokemons.filter(p => p.id <= 251);
 
