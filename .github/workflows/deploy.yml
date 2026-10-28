@@ -31,7 +31,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/react_pokedex:latest
-\
-              --net lab-net \
-              --restart always \
-              ${{ secrets.DOCKERHUB_USERNAME }}/react_pokedex:latest
