@@ -31,25 +31,7 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/react_pokedex:latest
-
-      # 5. Conecta na VM via SSH e atualiza o container
-      - name: Deploy to VM via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            # Baixa a nova imagem do Docker Hub
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/react_pokedex:latest
-
-            # Remove o container antigo (se existir)
-            docker stop react-pokedex || true
-            docker rm react-pokedex || true
-
-            # Sobe o novo container conectado na rede lab-net (Sem expor portas externas)
-            docker run -d \
-              --name react-pokedex \
+\
               --net lab-net \
               --restart always \
               ${{ secrets.DOCKERHUB_USERNAME }}/react_pokedex:latest
